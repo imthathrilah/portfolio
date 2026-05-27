@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImthathRilah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --accent: #00ff88; 
+            --text-dim: #a0a0a0;
+            --text-bright: #ffffff;
+            --nav-height: 80px;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-bright);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 8%; z-index: 1000; transition: var(--transition);
+        }
+        nav.scrolled {
+            height: 65px; background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a {
+            text-decoration: none; color: var(--text-dim); font-size: 0.8rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        nav ul li a:hover { color: var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 0 10%;
+            background: radial-gradient(circle at 80% 20%, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        .hero-tag { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 2rem; }
+        
+        /* --- About Section --- */
+        .about-container {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 50px; align-items: center; padding: 100px 10%;
+        }
+        .detail-label {
+            flex: 0 0 160px; /* Fixed width for labels to keep them aligned */
+            color: #00ff88; /* Cyber Green for the labels */
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .detail-value {
+            color: #ffffff; /* Solid White for the answers */
+            flex: 1;
+        }
+        .about-image {
+            width: 100%; max-width: 400px; height: 500px;
+            background: #222; border: 1px solid var(--accent);
+            position: relative; overflow: hidden; border-radius: 4px;
+        }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
+        .about-image:hover img { filter: grayscale(0%); }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-top: 30px;
+        }
+        .skill-item { background: var(--surface); padding: 20px; border-radius: 4px; border-left: 3px solid var(--accent); }
+
+        /* --- Experience Timeline --- */
+        .experience { padding: 100px 10%; background: #0d0d0d; }
+        .timeline-item {
+            border-left: 1px solid var(--accent); padding-left: 30px;
+            padding-bottom: 40px; position: relative;
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -6px; top: 0;
+            width: 11px; height: 11px; background: var(--accent); border-radius: 50%;
+        }
+        .timeline-date { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 0.85rem; }
+
+        /* --- Section Styling --- */
+        .section-header { margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--surface); padding: 40px; transition: var(--transition); border: 1px solid rgba(255,255,255,0.05); }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .about-container { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+
+        /* --- Text Alignment --- */
+        .hero p, 
+        .about-text p, 
+        .timeline-item p:last-child, 
+        .skills-grid .skill-item p, 
+        .card p, 
+        .section-header p,
+        #contact .reveal > p {
+            text-align: justify !important;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="logo">PORTFOLIO.</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#work">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <span class="hero-tag">WELCOME. EXPLORE MY WORK.</span>
+        <h1>Imthath Rilah MIM <br>B.Sc  .  B.Eng (Hons)</h1>
+        <p style="color: var(--text-dim); max-width: 700px;">I am a motivated final-year Mechanical Engineering student at the University of the West of England, dedicated to continuous professional development. A collaborative team player with strong leadership skills and a proven problem-solving aptitude. Committed to delivering high-quality work within strict deadlines, I approach all projects with an open mind and a respectful, adaptable attitude toward colleagues and clients</p>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-container reveal">
+    <div class="about-image">
+        <img src="1 (9).jpg" alt="Mohamed Ilyas Mohamed Imthath Rila">
+    </div>
+    <div class="about-text">
+        <span class="hero-tag">ABOUT ME</span>
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">I bridge the gap between design and reality.</h2>
+        <p style="color: var(--text-dim);">
+            I am a dedicated Mechanical Engineer with a passion for creating efficient, automated systems. 
+            With a background in both hardware design and software integration, I focus on building 
+            solutions that are not only functional but sustainable for the modern industrial landscape.
+        </p>
+         <br>
+
+        <!-- Personal Details List -->
+        <ul class="about-details-list">
+            <li>
+                <span class="detail-label">Full Name :</span> 
+                <span class="detail-value">Mohamed Ilyas Mohamed Imthath Rila</span>
+            </li>
+            <li>
+                <span class="detail-label">Gender :</span> 
+                <span class="detail-value">Male</span>
+            </li>
+            <li>
+                <span class="detail-label">Nationality :</span> 
+                <span class="detail-value">Sri Lankan</span>
+            </li>
+            <li>
+                <span class="detail-label">Address :</span>
+                <span class="detail-value">Rahumath Traders, Main Street, Birainthuraichenai, Valaichenai, Batticaloa ( Permanent Address )</span> 
+                <br>
+                <span class="detail-value">Maradana, Colombo ( Temporary Address )</span>
+            </li>
+            
+        </ul>
+    </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+        <section id="education" style="padding: 100px 10%; background: #0d0d0d;">
+            <div class="section-header reveal">
+                <h2>Education</h2>
+            </div>
+            <div class="grid">
+                <div class="card reveal">
+                    <span class="timeline-date">2022 - 2024</span>
+                    <h3>B.Sc. Electronics and Automation Technologies</h3>
+                    <p>University of Colombo</p>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">2025 - 2026</span>
+                    <h3>B.Eng(Hons).Mechanical Engineering (Mechatronics)</h3>
+                    <p>University of West of England</p>
+                </div>
+            </div>
+
+            <!-- CERTIFICATIONS SUB-SECTION -->
+            <div id="certifications" class="section-header reveal" style="margin-top: 80px;">
+                <h3 style="font-size: 2rem; margin-bottom: 10px;">Certifications</h3>
+                <p style="color: var(--text-dim);">Professional qualifications and achievements.</p>
+            </div>
+            <div class="grid">
+                <div class="card reveal">
+                    <span class="timeline-date">2024</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Certificate in Industrial Automation</h3>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">2024</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Certificate in Robotics Process Automation</h3>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">2022</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Mechanical Workshop Practice</h3>
+                    <p style="color: var(--text-dim);">Successfully Completed</p>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">LinkedIn</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Lean Six Sigma Foundation</h3>
+                    <p style="color: var(--text-dim);">Recognized by PMI & NASBA</p>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">LinkedIn</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Project Management Foundation</h3>
+                    <p style="color: var(--text-dim);">Recognized by PMI & NASBA</p>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">LinkedIn</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Professional PLC Developer (R)</h3>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">Certification</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">AL/ML Engineer Stage 1 (R)</h3>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">2015</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Diploma in Computer Application Assistant</h3>
+                </div>
+                <div class="card reveal">
+                    <span class="timeline-date">Diploma</span>
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">Skill Development</h3>
+                    <p style="color: var(--text-dim);">English, Graphic Design, and Soft Skills</p>
+                </div>
+            </div>
+        </section>
+        <!-- Add this section before the <footer> tag in your HTML -->
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="work" class="experience">
+        <div class="section-header reveal">
+            <h2>Work Experience</h2>
+        </div>
+        <div class="reveal">
+            <div class="timeline-item">
+                <span class="timeline-date">2025 October - 2026 May</span>
+                <h3>Autonomation Engineering Intern</h3>
+                <p style="color: var(--accent);">Silueta Private Ltd. ( MAS Holdings )</p>
+                <p style="color: var(--accent);">Biyagama  , Gampaha</p>
+                <p style="color: var(--text-dim);">Dedicated to industrial efficiency, I have extensive experience in optimizing and bug-fixing IoT and Andon systems to maintain seamless real-time production monitoring. My work involves a blend of technical execution—such as leading machine modifications and retrofits—and strategic management of digitalization project reporting. Whether troubleshooting technical hurdles or supporting senior engineering teams, I focus on delivering accurate data and improved machinery performance to drive operational success</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">2023 - 2024</span>
+                <h3>Engineering Intern</h3>
+                <p style="color: var(--accent);">EcoSystems Manufacturing</p>
+                <p style="color: var(--text-dim);">Assisted in the design of high-efficiency HVAC systems and performed thermal stress analysis.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" style="padding: 100px 10%;">
+        <div class="section-header reveal">
+            <h2>Technical Skills</h2>
+            <p style="color: var(--text-dim);">My engineering toolkit.</p>
+        </div>
+        <div class="skills-grid reveal">
+            <div class="skill-item">
+                <h4 style="margin-bottom: 10px;">Industrial Automation & Control</h4>
+                <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;">
+                    <strong style="color: var(--text-bright);">Systems:</strong> Control Systems, Electro-Pneumatic System Design.<br>
+                    <strong style="color: var(--text-bright);">Programming:</strong> PLC (Ladder Logic), LabView.<br>
+                    <strong style="color: var(--text-bright);">Monitoring:</strong> HMI & SCADA Interfaces.<br>
+                    <strong style="color: var(--text-bright);">Hardware:</strong> Arduino Coding & Electronics.
+                </p>
+            </div>
+            <div class="skill-item">
+                <h4 style="margin-bottom: 10px;">Engineering Design & Manufacturing</h4>
+                <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;">
+                    <strong style="color: var(--text-bright);">CAD/CAM:</strong> SolidWorks, AutoCAD, CAM Software.<br>
+                    <strong style="color: var(--text-bright);">Electronics Design:</strong> EasyEDA (PCB Design).<br>
+                    <strong style="color: var(--text-bright);">Methodology:</strong> Engineering Design Principles.
+                </p>
+            </div>
+            <div class="skill-item">
+                <h4 style="margin-bottom: 10px;">Software & Digital Development</h4>
+                <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;">
+                    <strong style="color: var(--text-bright);">Languages:</strong> Python, C, C++, Java, JavaScript.<br>
+                    <strong style="color: var(--text-bright);">Web & IoT:</strong> Web Development, IoT System Integration.<br>
+                    <strong style="color: var(--text-bright);">Emerging Tech:</strong> Machine Learning.
+                </p>
+            </div>
+            <div class="skill-item">
+                <h4 style="margin-bottom: 10px;">Professional Tools</h4>
+                <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;">
+                    <strong style="color: var(--text-bright);">Productivity:</strong> Microsoft Office Suite (Word, Excel, PowerPoint, etc.).
+                </p>
+            </div>
+        </div>
+
+        <!-- LANGUAGES SUB-SECTION -->
+        <div class="section-header reveal" style="margin-top: 80px;">
+            <h3 style="font-size: 2rem; margin-bottom: 10px;">Languages</h3>
+            <p style="color: var(--text-dim);">Linguistic and communication proficiency.</p>
+        </div>
+        <div class="skills-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="skill-item">
+                <h4 style="margin-bottom: 5px;">English</h4>
+                <p style="font-size: 0.9rem; color: var(--accent);">Professional Working</p>
+            </div>
+            <div class="skill-item">
+                <h4 style="margin-bottom: 5px;">Tamil</h4>
+                <p style="font-size: 0.9rem; color: var(--accent);">Native / Bilingual</p>
+            </div>
+            <div class="skill-item">
+                <h4 style="margin-bottom: 5px;">Sinhala</h4>
+                <p style="font-size: 0.9rem; color: var(--accent);">Professional Working</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" style="padding: 100px 10%;">
+        <div class="section-header reveal">
+            <h2>Academic Projects</h2>
+        </div>
+        <div class="grid">
+            <div class="card reveal">
+                <h3>EcoWay Hybrid System</h3>
+                <p style="color: var(--text-dim); margin-bottom: 15px;">Renewable energy harvesting using highway vehicle turbulence.</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px;">
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">SOLIDWORKS</span>
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">CFD Analysis</span>
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">Sustainability</span>
+                </div>
+                <a href="EcoWay_Project_Details.pdf" target="_blank" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
+            </div>
+            <div class="card reveal">
+                <h3>EcoTrash IoT</h3>
+                <p style="color: var(--text-dim); margin-bottom: 15px;">Smart waste management solution using thermal sensors and PLC.</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px;">
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">IoT Integration</span>
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">PLC Programming</span>
+                    <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">Mechatronics</span>
+                </div>
+                <a href="EcoTrash_Project_Details.pdf" target="_blank" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="contact" style="padding: 100px 10%; background: var(--bg); text-align: center;">
+    <div class="reveal">
+        <span class="hero-tag">05. GET IN TOUCH</span>
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">Let’s Connect.</h2>
+        <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto 40px auto;">
+            I am currently open to new opportunities in Mechanical Engineering and Automation. 
+            Whether you have a question or just want to say hi, my inbox is always open!
+        </p>
+
+        <!-- Direct Contact Info -->
+        <div style="margin-bottom: 40px;">
+            <p style="font-size: 1.2rem; color: var(--accent); font-family: 'Space Mono', monospace;">
+                imthathrilah@gmail.com
+            </p>
+            <p style="font-size: 1.1rem; color: var(--text-bright);">
+                +94 77 319 1604
+            </p>
+            <p style="color: var(--text-dim);">Colombo, Sri Lanka</p>
+        </div>
+
+        <!-- Social Buttons -->
+        <div class="social-links" style="display: flex; justify-content: center; gap: 20px;">
+            <a href="mailto:imthathrilah@gmail.com" class="social-icon email" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px;">
+                Email Me
+            </a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-icon linkedin" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px;">
+                LinkedIn
+            </a>
+        </div>
+    </div>
+    </section>
+
+    
+
+    <footer style="padding: 50px 10%; text-align: center; border-top: 1px solid #222;">
+        <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2026 | DESIGNED FOR PERFORMANCE</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+    </script>
+</body>
+</html>

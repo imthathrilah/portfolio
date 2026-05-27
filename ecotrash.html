@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrash Project Details | Tetranix</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #f0f0f0;
+            --text-dim: #a0a0a0;
+            --text-bright: #ffffff;
+            --accent: #00ff88;
+            --accent-bg: rgba(0, 255, 136, 0.1);
+            --border: #333333;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+        }
+
+        header {
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--text-bright);
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: var(--accent-bg);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            color: var(--text-bright);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        ul {
+            color: var(--text-dim);
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: var(--text-bright);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&#8592; Back to Portfolio</a>
+        
+        <header>
+            <h1>EcoTrash</h1>
+            <div class="subtitle">The Intelligent Circular Economy Ecosystem</div>
+            <div class="tags">
+                <span class="tag">IoT Integration</span>
+                <span class="tag">NodeMCU ESP8266</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Android App</span>
+                <span class="tag">WaaS</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Project Overview</h2>
+            <p>Originally conceived as a high-distinction Final Year Project at the University of Colombo, EcoTrash has scaled into a proprietary "Waste-as-a-Service" (WaaS) ecosystem under the Tetranix startup. It bridges the gap between inefficient urban waste collection and the global circular economy by transforming urban refuse into a traceable, profitable commodity.</p>
+        </section>
+
+        <section>
+            <h2>The Problem</h2>
+            <p>Urban areas face a severe waste crisis characterized by "Organic Decay" and the "Single-Bin Culture." Mixing organic waste with recyclables drops material market value by up to 80%. Furthermore, municipal collection teams follow fixed, "blind" routes regardless of actual bin fill levels, leading to high fuel costs, unnecessary carbon emissions, and public health risks from overflowing dumpsites.</p>
+        </section>
+
+        <section>
+            <h2>Technical Architecture</h2>
+            <ul>
+                <li><strong>Hardware:</strong> NodeMCU ESP8266 microcontrollers interfaced with HC-SR04 ultrasonic sensors for volume tracking and HX711 load cells for precise weight measurement. Automated solenoid doors utilize limit switches for reliable positioning.</li>
+                <li><strong>Backend Protocol:</strong> Firebase Realtime Database acts as the central hub, utilizing WebSockets for sub-500ms data synchronization and HTTP long-polling as a fallback for unstable network connectivity.</li>
+                <li><strong>Software Interface:</strong> A fully customized Android application and Web Dashboard developed from scratch. Features distinct interfaces for end-users (B2C) to track waste and earnings, and collection teams (B2B) to view route optimization data.</li>
+                <li><strong>At-Source Processing:</strong> Features integrated motorized crushing mechanisms for volume reduction and a unique thermal drying process to eliminate moisture and odors from organic waste.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Outcomes & Commercial Vision</h2>
+            <p>Extensive hardware validation achieved a 95% accuracy rate in fill-level detection and a 98% accuracy rate in mass measurement. The project has evolved into a "Waste-to-Wealth" financial engine, incentivizing proper segregation by converting verified waste weight into digital cash payouts. Tetranix is currently targeting Institutional Pilots (Q3 2026) to deploy industrial-grade "Eco-Stations" before a widespread urban rollout.</p>
+        </section>
+    </div>
+</body>
+</html>
