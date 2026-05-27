@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImthathRilah</title>
+    <title>Imthath Rilah</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,8 +16,11 @@
             --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        
+        /* Accessibility: Outline for keyboard navigation */
+        *:focus-visible { outline: 2px dashed var(--accent); outline-offset: 4px; }
 
         body {
             background-color: var(--bg);
@@ -353,7 +356,7 @@
                     <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">CFD Analysis</span>
                     <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">Sustainability</span>
                 </div>
-                <a href="EcoWay_Project_Details.pdf" target="_blank" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
+                <a href="ecoway.html" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
             </div>
             <div class="card reveal">
                 <h3>EcoTrash IoT</h3>
@@ -363,12 +366,11 @@
                     <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">PLC Programming</span>
                     <span style="font-size: 0.75rem; color: var(--accent); background: rgba(0, 255, 136, 0.1); padding: 4px 8px; border-radius: 4px; font-family: 'Space Mono', monospace;">Mechatronics</span>
                 </div>
-                <a href="EcoTrash_Project_Details.pdf" target="_blank" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
+                <a href="ecotrash.html" style="color: var(--text-bright); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.3s;">Learn More &#8594;</a>
             </div>
         </div>
     </section>
 
-    
 
     <section id="contact" style="padding: 100px 10%; background: var(--bg); text-align: center;">
     <div class="reveal">
@@ -395,7 +397,7 @@
             <a href="mailto:imthathrilah@gmail.com" class="social-icon email" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px;">
                 Email Me
             </a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-icon linkedin" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px;">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="social-icon linkedin" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px;">
                 LinkedIn
             </a>
         </div>
